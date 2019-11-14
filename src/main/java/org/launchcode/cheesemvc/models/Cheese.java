@@ -1,11 +1,9 @@
 package org.launchcode.cheesemvc.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Cheese {
@@ -24,6 +22,9 @@ public class Cheese {
 
     @ManyToOne
     private Category category;
+
+    @ManyToMany(mappedBy = "cheeses")
+    private List<Menu> menus;
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -52,11 +53,11 @@ public class Cheese {
         this.description = description;
     }
 
-    public CheeseType getType() {
-        return type;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setType(CheeseType type) {
-        this.type = type;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
